@@ -1,8 +1,10 @@
-package com.looptrace.planetary;
+package com.looptrace.planetary.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.looptrace.planetary.R;
 
 public class MainActivity extends AppCompatActivity {
 

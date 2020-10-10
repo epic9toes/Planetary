@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Planetary</string>
+
+    <string name="preference_key_file">UserPreferences</string>
 </resources>
