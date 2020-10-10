@@ -1,5 +1,6 @@
 package com.looptrace.planetary.activities;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -17,10 +18,10 @@ public class SplashScreen extends AppCompatActivity {
         SharedPreferences preferences = getSharedPreferences(getString(R.string.preference_key_file), MODE_PRIVATE);
         boolean isFinished = preferences.getBoolean("Finished", false);
 
-//        if (isFinished)
-//            startActivity(new Intent(this, SigningActivity.class));
-//        else startActivity(new Intent(this, IntroActivity.class));
-//        finish();
+        if (isFinished)
+            startActivity(new Intent(this, MainActivity.class));
+        else startActivity(new Intent(this, GetStartedActivity.class));
+        finish();
 
     }
 }

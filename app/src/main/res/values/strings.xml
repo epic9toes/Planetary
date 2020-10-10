@@ -2,4 +2,17 @@
     <string name="app_name">Planetary</string>
 
     <string name="preference_key_file">UserPreferences</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="explore_the_solar_system">Explore The Solar System.</string>
+    <string name="get_started">Get Started</string>
+    <string name="space_exploration">Space Exploration</string>
+    <string name="space_exploration_summary">Space exploration is the use of astronomy and space technology to explore outer space.</string>
+    <string name="next">Next</string>
+    <string name="skip">Skip</string>
+    <string name="planetary_understanding">Planetary Understanding</string>
+    <string name="planetary_understanding_text">Experiments performed in space help us understand the health problems associated with aging and sedentary lifestyles.</string>
+    <string name="climate_change_notice">Climate Change Notice</string>
+    <string name="climate_change_notice_text">Some satellites monitor signs of climate change, such as melting ice and rising waters.</string>
+    <string name="explore_now">Explore Now</string>
 </resources>
