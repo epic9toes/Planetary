@@ -19,7 +19,7 @@ public class SplashScreen extends AppCompatActivity {
         boolean isFinished = preferences.getBoolean("Finished", false);
 
         if (isFinished)
-            startActivity(new Intent(this, MainActivity.class));
+            startActivity(new Intent(this, SignInUpActivity.class));
         else startActivity(new Intent(this, GetStartedActivity.class));
         finish();
 

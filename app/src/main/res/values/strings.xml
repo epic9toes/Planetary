@@ -15,4 +15,9 @@
     <string name="climate_change_notice">Climate Change Notice</string>
     <string name="climate_change_notice_text">Some satellites monitor signs of climate change, such as melting ice and rising waters.</string>
     <string name="explore_now">Explore Now</string>
+    <string name="email_hint">Enter Email</string>
+    <string name="password_hint">Enter Password</string>
+    <string name="sign_in">Sign In</string>
+    <string name="new_acct_caption">Don\'t have an account?</string>
+    <string name="sign_up">Sign Up</string>
 </resources>
