@@ -20,4 +20,6 @@
     <string name="sign_in">Sign In</string>
     <string name="new_acct_caption">Don\'t have an account?</string>
     <string name="sign_up">Sign Up</string>
+    <string name="full_name_hint">Enter Fullname eg (Onwe Sunday C)</string>
+    <string name="existing_acct_caption">Already have an account?</string>
 </resources>
