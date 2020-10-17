@@ -61,27 +61,27 @@
 
 
         <TextView
-            android:id="@+id/sun_distance_caption"
+            android:id="@+id/gravity_caption"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/hk_grotesk_regular"
-            android:text="Sun Distance: "
+            android:text="Gravity: "
             android:textSize="14sp"
             app:layout_constraintStart_toEndOf="@id/planet_image"
             app:layout_constraintTop_toBottomOf="@id/name_caption" />
 
         <TextView
-            android:id="@+id/sun_distance"
+            android:id="@+id/gravity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/hk_grotesk_medium"
             android:text="778.5 million km"
             android:textAllCaps="true"
             android:textSize="14sp"
-            app:layout_constraintStart_toEndOf="@id/sun_distance_caption"
-            app:layout_constraintTop_toTopOf="@id/sun_distance_caption" />
+            app:layout_constraintStart_toEndOf="@id/gravity_caption"
+            app:layout_constraintTop_toTopOf="@id/gravity_caption" />
 
         <TextView
             android:id="@+id/date_discovered_caption"
@@ -93,7 +93,7 @@
             android:text="Date Discovered: "
             android:textSize="14sp"
             app:layout_constraintStart_toEndOf="@id/planet_image"
-            app:layout_constraintTop_toBottomOf="@id/sun_distance" />
+            app:layout_constraintTop_toBottomOf="@id/gravity" />
 
         <TextView
             android:id="@+id/date_discovered"

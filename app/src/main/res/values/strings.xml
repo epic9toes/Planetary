@@ -22,4 +22,6 @@
     <string name="sign_up">Sign Up</string>
     <string name="full_name_hint">Enter Fullname eg (Onwe Sunday C)</string>
     <string name="existing_acct_caption">Already have an account?</string>
+    <string name="summary_text">Ceres is the largest object in the main asteroid belt that lies between the orbits of Mars and Jupiter. With a diameter of 940 km, Ceres is both the largest of the asteroids and the only dwarf planet inside Neptune\'s orbit. It is the 25th-largest body in the Solar System within the orbit of Neptune.</string>
+    <string name="unavaliable">Unavailable</string>
 </resources>
