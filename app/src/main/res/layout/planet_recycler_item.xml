@@ -30,7 +30,7 @@
             android:id="@+id/planet_image"
             android:layout_width="120dp"
             android:layout_height="120dp"
-            android:src="@drawable/planet_sample"
+            android:src="@drawable/planets_illustrator"
             app:civ_border_color="@color/colorPrimaryDark"
             app:civ_border_width="0.5dp"
             app:layout_constraintBottom_toBottomOf="parent"
