@@ -10,4 +10,8 @@
         android:name="com.looptrace.planetary.fragments.PlanetFragment"
         android:label="fragment_planet"
         tools:layout="@layout/fragment_planet" />
+    <fragment
+        android:id="@+id/planetDetailFragment"
+        android:name="com.looptrace.planetary.fragments.PlanetDetailFragment"
+        android:label="PlanetDetailFragment" />
 </navigation>
