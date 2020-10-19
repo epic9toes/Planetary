@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:padding="20dp"
+    tools:context=".fragments.SearchFragment">
+
+    <EditText
+        android:id="@+id/search_box"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/gray_stroke_bg"
+        android:drawablePadding="15dp"
+        android:hint="@string/search_hint"
+        android:padding="20dp"
+        android:textSize="18sp"
+        app:drawableStartCompat="@drawable/ic_search_outline"
+        app:layout_constraintBottom_toTopOf="@id/search_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/search_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/btn_bg_accent"
+        android:fontFamily="@font/hk_grotesk_bold"
+        android:paddingStart="70dp"
+        android:paddingEnd="70dp"
+        android:text="Explore"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@id/page_not_found"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/search_box"
+        app:layout_goneMarginBottom="15dp" />
+
+    <include
+        android:id="@+id/page_not_found"
+        layout="@layout/search_not_found"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/search_btn" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
