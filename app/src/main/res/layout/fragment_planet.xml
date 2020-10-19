@@ -6,6 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".fragments.PlanetFragment">
 
+    <include
+        android:id="@+id/error_page"
+        layout="@layout/error_info"
+        android:visibility="invisible"
+        android:elevation="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <include
         android:id="@+id/loading_indicator"

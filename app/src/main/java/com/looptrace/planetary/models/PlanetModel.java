@@ -1,8 +1,11 @@
 package com.looptrace.planetary.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 
-public class PlanetModel {
+public class PlanetModel implements Parcelable {
 
     private String id;
     private String name;
@@ -32,8 +35,9 @@ public class PlanetModel {
     private String alternativeName;
     private float axialTilt;
     private String rel;
+    private String image;
 
-    public PlanetModel(String id, String name, String englishName, Boolean isPlanet, ArrayList<PlanetMoon> moons, int semimajorAxis, int perihelion, int aphelion, float eccentricity, float inclination, Mass mass, Vol vol, float density, float gravity, float escape, float meanRadius, float equaRadius, float polarRadius, float flattening, String dimension, String sideralOrbit, String sideralRotation, String aroundPlanet, String discoveredBy, String discoveryDate, String alternativeName, int axialTilt, String rel) {
+    public PlanetModel(String id, String name, String englishName, Boolean isPlanet, ArrayList<PlanetMoon> moons, int semimajorAxis, int perihelion, int aphelion, float eccentricity, float inclination, Mass mass, Vol vol, float density, float gravity, float escape, float meanRadius, float equaRadius, float polarRadius, float flattening, String dimension, String sideralOrbit, String sideralRotation, String aroundPlanet, String discoveredBy, String discoveryDate, String alternativeName, int axialTilt, String rel, String image) {
         this.id = id;
         this.name = name;
         this.englishName = englishName;
@@ -62,7 +66,50 @@ public class PlanetModel {
         this.alternativeName = alternativeName;
         this.axialTilt = axialTilt;
         this.rel = rel;
+        this.image = image;
     }
+
+    protected PlanetModel(Parcel in) {
+        id = in.readString();
+        name = in.readString();
+        englishName = in.readString();
+        byte tmpIsPlanet = in.readByte();
+        isPlanet = tmpIsPlanet == 0 ? null : tmpIsPlanet == 1;
+        semimajorAxis = in.readLong();
+        perihelion = in.readLong();
+        aphelion = in.readLong();
+        eccentricity = in.readFloat();
+        inclination = in.readFloat();
+        density = in.readFloat();
+        gravity = in.readFloat();
+        escape = in.readFloat();
+        meanRadius = in.readFloat();
+        equaRadius = in.readFloat();
+        polarRadius = in.readFloat();
+        flattening = in.readFloat();
+        dimension = in.readString();
+        sideralOrbit = in.readString();
+        sideralRotation = in.readString();
+        aroundPlanet = in.readString();
+        discoveredBy = in.readString();
+        discoveryDate = in.readString();
+        alternativeName = in.readString();
+        axialTilt = in.readFloat();
+        rel = in.readString();
+        image = in.readString();
+    }
+
+    public static final Creator<PlanetModel> CREATOR = new Creator<PlanetModel>() {
+        @Override
+        public PlanetModel createFromParcel(Parcel in) {
+            return new PlanetModel(in);
+        }
+
+        @Override
+        public PlanetModel[] newArray(int size) {
+            return new PlanetModel[size];
+        }
+    };
 
     public String getId() {
         return id;
@@ -288,6 +335,14 @@ public class PlanetModel {
         this.rel = rel;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     @Override
     public String toString() {
         return "PlanetModel{" +
@@ -320,5 +375,40 @@ public class PlanetModel {
                 ", axialTilt=" + axialTilt +
                 ", rel='" + rel + '\'' +
                 '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
+        dest.writeString(name);
+        dest.writeString(englishName);
+        dest.writeByte((byte) (isPlanet == null ? 0 : isPlanet ? 1 : 2));
+        dest.writeLong(semimajorAxis);
+        dest.writeLong(perihelion);
+        dest.writeLong(aphelion);
+        dest.writeFloat(eccentricity);
+        dest.writeFloat(inclination);
+        dest.writeFloat(density);
+        dest.writeFloat(gravity);
+        dest.writeFloat(escape);
+        dest.writeFloat(meanRadius);
+        dest.writeFloat(equaRadius);
+        dest.writeFloat(polarRadius);
+        dest.writeFloat(flattening);
+        dest.writeString(dimension);
+        dest.writeString(sideralOrbit);
+        dest.writeString(sideralRotation);
+        dest.writeString(aroundPlanet);
+        dest.writeString(discoveredBy);
+        dest.writeString(discoveryDate);
+        dest.writeString(alternativeName);
+        dest.writeFloat(axialTilt);
+        dest.writeString(rel);
+        dest.writeString(image);
     }
 }
