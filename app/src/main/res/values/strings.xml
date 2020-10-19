@@ -24,4 +24,5 @@
     <string name="existing_acct_caption">Already have an account?</string>
     <string name="summary_text">There is no available summary at this time for this planet.</string>
     <string name="unavaliable">Unavailable</string>
+    <string name="search_hint">Search for planets, moons or astroids</string>
 </resources>

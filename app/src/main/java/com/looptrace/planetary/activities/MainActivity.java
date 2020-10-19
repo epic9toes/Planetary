@@ -1,7 +1,6 @@
 package com.looptrace.planetary.activities;
 
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,23 +29,13 @@ public class MainActivity extends AppCompatActivity {
         mNavController.addOnDestinationChangedListener((controller, destination, arguments) -> {
 //            switch (destination.getId()) {
 //                case R.id.homeFragment:
-//                    title.setText("Home");
+//                   destination.getId();
 //                    return;
 //
-//                case R.id.classroomFragment:
+//                case R.id.searchFragment:
 //                    title.setText("Classroom");
 //                    return;
 //
-//                case R.id.certificateFragment:
-//                    title.setText("Certification");
-//                    return;
-//
-//                case R.id.quizFragment:
-//                    title.setText("Quizzes");
-//                    return;
-//
-//                case R.id.examFragment:
-//                    title.setText("Exams");
 //            }
 
         });
