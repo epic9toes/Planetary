@@ -3,7 +3,7 @@
 
 
     <item
-        android:id="@+id/homeFragment"
+        android:id="@+id/planetFragment"
         android:icon="@drawable/ic_home_outline"
         android:title="Home" />
 
@@ -13,13 +13,13 @@
         android:title="Search" />
 
     <item
-        android:id="@+id/certificateFragment"
+        android:id="@+id/bookmarkFragment"
         android:icon="@drawable/ic_bookmarks_outline"
         android:title="Bookmarked" />
 
 
     <item
-        android:id="@+id/quizFragment"
+        android:id="@+id/profileFragment"
         android:icon="@drawable/ic_person_outline"
         android:title="Profile" />
 

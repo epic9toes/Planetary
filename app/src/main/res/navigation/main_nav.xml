@@ -20,4 +20,14 @@
         android:name="com.looptrace.planetary.fragments.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" />
+    <fragment
+        android:id="@+id/bookmarkFragment"
+        android:name="com.looptrace.planetary.fragments.BookmarkFragment"
+        android:label="fragment_bookmark"
+        tools:layout="@layout/fragment_bookmark" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.looptrace.planetary.fragments.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>
