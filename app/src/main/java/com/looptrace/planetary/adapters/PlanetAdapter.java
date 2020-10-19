@@ -13,6 +13,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.looptrace.planetary.R;
 import com.looptrace.planetary.models.PlanetModel;
 
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -61,7 +65,9 @@ public class PlanetAdapter extends RecyclerView.Adapter<PlanetAdapter.ViewHolder
         if (planet.getDiscoveryDate().equals("")) {
             holder.mDateDiscovered.setText(R.string.unavaliable);
         } else {
-            holder.mDateDiscovered.setText(planet.getDiscoveryDate());
+            DateTimeFormatter formatter = DateTimeFormat.forPattern("dd/MM/yyyy");
+            DateTime dt = formatter.parseDateTime(planet.getDiscoveryDate());
+            holder.mDateDiscovered.setText(dt.dayOfWeek().getAsShortText() + " " + dt.dayOfMonth().getAsText() + " " + dt.monthOfYear().getAsShortText() + " " + dt.getYear());
         }
 
         if (planet.getDiscoveredBy().equals("")) {

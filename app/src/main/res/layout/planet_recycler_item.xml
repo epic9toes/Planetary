@@ -44,7 +44,7 @@
             android:layout_marginStart="10dp"
             android:fontFamily="@font/hk_grotesk_regular"
             android:text="Name: "
-            android:textSize="14sp"
+            android:textSize="16sp"
             app:layout_constraintStart_toEndOf="@id/planet_image"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -52,10 +52,10 @@
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/hk_grotesk_medium"
+            android:fontFamily="@font/hk_grotesk_semi_bold"
             android:text="Earth"
             android:textAllCaps="true"
-            android:textSize="14sp"
+            android:textSize="18sp"
             app:layout_constraintStart_toEndOf="@id/name_caption"
             app:layout_constraintTop_toTopOf="@id/name_caption" />
 

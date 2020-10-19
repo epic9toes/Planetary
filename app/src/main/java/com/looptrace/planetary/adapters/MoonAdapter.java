@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.looptrace.planetary.R;
 import com.looptrace.planetary.models.Moon;
+import com.looptrace.planetary.models.PlanetMoon;
 
 import java.util.ArrayList;
 
@@ -17,10 +18,10 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MoonAdapter extends RecyclerView.Adapter<MoonAdapter.ViewHolder> {
 
-    private ArrayList<Moon> mMoons;
+    private ArrayList<PlanetMoon> mMoons;
     private OnMoonListener mOnMoonListener;
 
-    public MoonAdapter(ArrayList<Moon> moons, OnMoonListener onMoonListener) {
+    public MoonAdapter(ArrayList<PlanetMoon> moons, OnMoonListener onMoonListener) {
         mMoons = moons;
         mOnMoonListener = onMoonListener;
     }
@@ -46,9 +47,8 @@ public class MoonAdapter extends RecyclerView.Adapter<MoonAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        Moon moon = mMoons.get(position);
-
-        holder.mName.setText(moon.getName());
+        PlanetMoon moon = mMoons.get(position);
+        holder.mName.setText(moon.getMoon());
 //        holder.mPlanetImage.setImageDrawable(planet.getDiscovered_by());
     }
 

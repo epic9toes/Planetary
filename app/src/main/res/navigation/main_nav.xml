@@ -13,5 +13,6 @@
     <fragment
         android:id="@+id/planetDetailFragment"
         android:name="com.looptrace.planetary.fragments.PlanetDetailFragment"
-        android:label="PlanetDetailFragment" />
+        android:label="PlanetDetailFragment" >
+    </fragment>
 </navigation>

@@ -1,31 +1,45 @@
 package com.looptrace.planetary.fragments;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.OvershootInterpolator;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.looptrace.planetary.Listeners.GetPlanetDetailsListener;
 import com.looptrace.planetary.adapters.MoonAdapter;
 import com.looptrace.planetary.databinding.FragmentPlanetDetailBinding;
-import com.looptrace.planetary.models.Moon;
+import com.looptrace.planetary.models.DetailPages;
+import com.looptrace.planetary.models.PlanetDetailRoot;
+import com.looptrace.planetary.models.PlanetModel;
+import com.looptrace.planetary.models.PlanetMoon;
+import com.looptrace.planetary.viewmodel.PlanetDetailViewModel;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter;
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
 
-public class PlanetDetailFragment extends Fragment implements MoonAdapter.OnMoonListener {
+public class PlanetDetailFragment extends Fragment implements MoonAdapter.OnMoonListener, GetPlanetDetailsListener {
 
 
     private FragmentPlanetDetailBinding mBinding;
-    private ArrayList<Moon> mMoons;
+    private ArrayList<PlanetMoon> mMoons;
     private MoonAdapter mMoonAdapter;
+    private PlanetModel mPlanet;
+    private PlanetDetailViewModel mPlanetDetailViewModel;
+    private PlanetDetailRoot mPlanetDataRoot;
 
     public PlanetDetailFragment() {
         // Required empty public constructor
@@ -36,11 +50,46 @@ public class PlanetDetailFragment extends Fragment implements MoonAdapter.OnMoon
                              Bundle savedInstanceState) {
         mBinding = FragmentPlanetDetailBinding.inflate(getLayoutInflater());
         View view = mBinding.getRoot();
+        mPlanet = getArguments().getParcelable("planetModel");
 
+        mPlanetDetailViewModel = ViewModelProviders.of(requireActivity()).get(PlanetDetailViewModel.class);
+        mPlanetDetailViewModel.mGetPlanetDetailsListener = this;
+        mPlanetDetailViewModel.init(800, mPlanet.getEnglishName());
+        mPlanetDetailViewModel.GetPlanetDetails().observe(requireActivity(), planetDetailRoot -> {
+            mPlanetDataRoot = planetDetailRoot;
+            final Map<String, DetailPages> pages = planetDetailRoot.getQuery().getPages();
+            for (DetailPages pages1 : pages.values()) {
+                if (!pages1.getExtract().equals("")) {
+                    mBinding.summaryDefault.setVisibility(View.INVISIBLE);
+                    mBinding.summaryText.loadData(pages1.getExtract(), "text/html", "UTF-8");
+                }
+                mBinding.summaryLoader.setVisibility(View.INVISIBLE);
+
+                if (pages1.getThumbnail() != null) {
+                    Picasso.get().load(pages1.getThumbnail().getSource()).into(mBinding.planetImage);
+                }
+                mBinding.imageLoader.setVisibility(View.INVISIBLE);
+            }
+        });
+        AssignUiObjects();
         processMoonRecycler();
         populateMoonRecycler();
 
         return view;
+    }
+
+    @SuppressLint("SetTextI18n")
+    private void AssignUiObjects() {
+        if (getArguments() != null && mPlanet != null) {
+            mBinding.name.setText(mPlanet.getEnglishName());
+            mBinding.axis.setText(mPlanet.getSemimajorAxis() + "");
+            mBinding.perihelion.setText(mPlanet.getPerihelion() + "");
+            mBinding.eccentricity.setText(mPlanet.getEccentricity() + "");
+            mBinding.density.setText(mPlanet.getDensity() + "");
+            mBinding.gravity.setText(mPlanet.getGravity() + "");
+            mBinding.dimension.setText(mPlanet.getSideralOrbit() + "");
+
+        }
     }
 
     private void processMoonRecycler() {
@@ -56,26 +105,74 @@ public class PlanetDetailFragment extends Fragment implements MoonAdapter.OnMoon
 
     private void populateMoonRecycler() {
         new Handler().postDelayed(() -> {
-
-            for (int i = 0; i < 15; i++) {
-                Moon moon = new Moon("1", "Circus", "");
-                mMoons.add(moon);
+            if (mPlanet.getMoons() != null) {
+                for (PlanetMoon moon :
+                        mPlanet.getMoons()) {
+                    mMoons.add(moon);
+                }
+                AlphaInAnimationAdapter alphaInAnimationAdapter = new AlphaInAnimationAdapter(mMoonAdapter);
+                alphaInAnimationAdapter.setDuration(2000);
+                alphaInAnimationAdapter.setInterpolator(new OvershootInterpolator());
+                alphaInAnimationAdapter.setFirstOnly(false);
+                mBinding.moonRecycler.setAdapter(new ScaleInAnimationAdapter(alphaInAnimationAdapter));
+                mBinding.moonRecycler.setVisibility(View.VISIBLE);
+                mMoonAdapter.notifyDataSetChanged();
+            } else {
+                mBinding.availableMoonCard.setVisibility(View.INVISIBLE);
             }
-            AlphaInAnimationAdapter alphaInAnimationAdapter = new AlphaInAnimationAdapter(mMoonAdapter);
-            alphaInAnimationAdapter.setDuration(2000);
-            alphaInAnimationAdapter.setInterpolator(new OvershootInterpolator());
-            alphaInAnimationAdapter.setFirstOnly(false);
-            mBinding.moonRecycler.setAdapter(new ScaleInAnimationAdapter(alphaInAnimationAdapter));
-            mBinding.moonRecycler.setVisibility(View.VISIBLE);
-//            mBinding.loadingIndicator.getRoot().setVisibility(View.INVISIBLE);
-//            mBinding.errorPage.getRoot().setVisibility(View.VISIBLE);
-            mMoonAdapter.notifyDataSetChanged();
-
         }, 1000);
     }
 
     @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mBinding.summaryDefault.setVisibility(View.VISIBLE);
+        mBinding.summaryText.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Activity activity = getActivity();
+        if (activity != null) {
+            mPlanetDetailViewModel.Retry(800, mPlanet.getEnglishName());
+        }
+
+    }
+
+    @Override
     public void onMoonClick(View view, int position) {
+
+    }
+
+    @Override
+    public void OnSuccess() {
+        Activity activity = getActivity();
+        if (activity != null && isAdded()) {
+            Toast.makeText(requireActivity(), "API call successful", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    @Override
+    public void OnFailure(String s) {
+        Activity activity = getActivity();
+        if (activity != null && isAdded()) {
+            mBinding.summaryLoader.setVisibility(View.INVISIBLE);
+            mBinding.imageLoader.setVisibility(View.INVISIBLE);
+            Toast.makeText(requireActivity(), s, Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    @Override
+    public void OnThrowableError(Throwable throwable) {
+        Activity activity = getActivity();
+        if (activity != null && isAdded()) {
+            mBinding.summaryLoader.setVisibility(View.INVISIBLE);
+            mBinding.imageLoader.setVisibility(View.INVISIBLE);
+            Toast.makeText(requireActivity(), "Error: " + throwable.getMessage(), Toast.LENGTH_SHORT).show();
+        }
 
     }
 }

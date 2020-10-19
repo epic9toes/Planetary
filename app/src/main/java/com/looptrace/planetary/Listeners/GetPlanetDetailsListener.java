@@ -1,6 +1,10 @@
 package com.looptrace.planetary.Listeners;
 
-public interface GetPlanetListener {
+import androidx.lifecycle.MutableLiveData;
+
+import com.looptrace.planetary.models.PlanetDetailRoot;
+
+public interface GetPlanetDetailsListener {
 
     void OnSuccess();
 
