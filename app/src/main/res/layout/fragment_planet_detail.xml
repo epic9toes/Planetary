@@ -121,18 +121,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@id/summary_caption" />
 
-                <TextView
-                    android:id="@+id/summary_default"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/hk_grotesk_bold"
-                    android:text="@string/summary_text"
-                    android:textSize="18sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/summary_caption" />
-
                 <WebView
                     android:id="@+id/summary_text"
                     android:layout_width="match_parent"

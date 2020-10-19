@@ -37,7 +37,6 @@ public class PlanetRepo {
                     mGetPlanetListener.OnFailure("An " + response.code() + " has occurred, please try again later.");
                 } else {
                     mPlanetDataRootMutableLiveData.setValue(response.body());
-                    mGetPlanetListener.OnSuccess();
                 }
             }
 
@@ -59,7 +58,6 @@ public class PlanetRepo {
                     mGetPlanetDetailsListener.OnFailure("An " + response.code() + " has occurred, please try again later.");
                 } else {
                     mDetailRootMutableLiveData.setValue(response.body());
-                    mGetPlanetDetailsListener.OnSuccess();
                 }
             }
 

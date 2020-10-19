@@ -2,6 +2,7 @@ package com.looptrace.planetary.fragments;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -10,16 +11,17 @@ import android.view.ViewGroup;
 import android.view.animation.OvershootInterpolator;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.looptrace.planetary.Listeners.GetPlanetDetailsListener;
+import com.looptrace.planetary.R;
 import com.looptrace.planetary.adapters.MoonAdapter;
 import com.looptrace.planetary.databinding.FragmentPlanetDetailBinding;
 import com.looptrace.planetary.models.DetailPages;
-import com.looptrace.planetary.models.PlanetDetailRoot;
 import com.looptrace.planetary.models.PlanetModel;
 import com.looptrace.planetary.models.PlanetMoon;
 import com.looptrace.planetary.viewmodel.PlanetDetailViewModel;
@@ -39,7 +41,7 @@ public class PlanetDetailFragment extends Fragment implements MoonAdapter.OnMoon
     private MoonAdapter mMoonAdapter;
     private PlanetModel mPlanet;
     private PlanetDetailViewModel mPlanetDetailViewModel;
-    private PlanetDetailRoot mPlanetDataRoot;
+    private Context appContext;
 
     public PlanetDetailFragment() {
         // Required empty public constructor
@@ -52,21 +54,24 @@ public class PlanetDetailFragment extends Fragment implements MoonAdapter.OnMoon
         View view = mBinding.getRoot();
         mPlanet = getArguments().getParcelable("planetModel");
 
+
         mPlanetDetailViewModel = ViewModelProviders.of(requireActivity()).get(PlanetDetailViewModel.class);
         mPlanetDetailViewModel.mGetPlanetDetailsListener = this;
         mPlanetDetailViewModel.init(800, mPlanet.getEnglishName());
         mPlanetDetailViewModel.GetPlanetDetails().observe(requireActivity(), planetDetailRoot -> {
-            mPlanetDataRoot = planetDetailRoot;
             final Map<String, DetailPages> pages = planetDetailRoot.getQuery().getPages();
             for (DetailPages pages1 : pages.values()) {
                 if (!pages1.getExtract().equals("")) {
-                    mBinding.summaryDefault.setVisibility(View.INVISIBLE);
                     mBinding.summaryText.loadData(pages1.getExtract(), "text/html", "UTF-8");
+                } else {
+                    mBinding.summaryText.loadData("<h4>There is no available summary at this time for this planet.</h4>", "text/html", "UTF-8");
                 }
                 mBinding.summaryLoader.setVisibility(View.INVISIBLE);
 
                 if (pages1.getThumbnail() != null) {
                     Picasso.get().load(pages1.getThumbnail().getSource()).into(mBinding.planetImage);
+                } else {
+                    mBinding.planetImage.setImageDrawable(appContext.getResources().getDrawable(R.drawable.planets_illustrator));
                 }
                 mBinding.imageLoader.setVisibility(View.INVISIBLE);
             }
@@ -123,12 +128,6 @@ public class PlanetDetailFragment extends Fragment implements MoonAdapter.OnMoon
         }, 1000);
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        mBinding.summaryDefault.setVisibility(View.VISIBLE);
-        mBinding.summaryText.setVisibility(View.INVISIBLE);
-    }
 
     @Override
     public void onResume() {
@@ -141,16 +140,14 @@ public class PlanetDetailFragment extends Fragment implements MoonAdapter.OnMoon
     }
 
     @Override
-    public void onMoonClick(View view, int position) {
-
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if (appContext == null)
+            appContext = context.getApplicationContext();
     }
 
     @Override
-    public void OnSuccess() {
-        Activity activity = getActivity();
-        if (activity != null && isAdded()) {
-            Toast.makeText(requireActivity(), "API call successful", Toast.LENGTH_SHORT).show();
-        }
+    public void onMoonClick(View view, int position) {
 
     }
 

@@ -91,11 +91,6 @@ public class PlanetFragment extends Fragment implements PlanetAdapter.OnPlanetLi
     }
 
     @Override
-    public void OnSuccess() {
-        Toast.makeText(requireActivity(), "API Call Successful", Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
     public void OnFailure(String s) {
         mBinding.loadingIndicator.getRoot().setVisibility(View.INVISIBLE);
         mBinding.errorPage.getRoot().setVisibility(View.VISIBLE);
