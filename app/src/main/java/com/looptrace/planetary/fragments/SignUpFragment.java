@@ -1,25 +1,22 @@
 package com.looptrace.planetary.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import com.looptrace.planetary.R;
-import com.looptrace.planetary.activities.MainActivity;
 import com.looptrace.planetary.databinding.FragmentSignUpBinding;
 
 
 public class SignUpFragment extends Fragment {
 
-    private Button mBtnSignUp;
-    private TextView mBtnLoginAcct;
+    private FragmentSignUpBinding mBinding;
+
 
     public SignUpFragment() {
         // Required empty public constructor
@@ -28,19 +25,16 @@ public class SignUpFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_sign_up, container, false);
+        mBinding = FragmentSignUpBinding.inflate(getLayoutInflater());
+        View view = mBinding.getRoot();
 
-        mBtnSignUp = view.findViewById(R.id.sign_up_btn);
-        mBtnSignUp.setOnClickListener(v -> {
-            startActivity(new Intent(requireActivity(), MainActivity.class));
-            requireActivity().finish();
+        mBinding.signUpBtn.setOnClickListener(v -> {
+            Toast.makeText(requireActivity(), "The sign up process hasn't been implemented.", Toast.LENGTH_SHORT).show();
         });
 
-        mBtnLoginAcct = view.findViewById(R.id.sign_in_acct);
-        mBtnLoginAcct.setOnClickListener(v -> {
+        mBinding.signInAcct.setOnClickListener(v -> {
             Navigation.findNavController(v).navigate(R.id.action_signUpFragment_to_signInFragment);
-            mBtnSignUp.setVisibility(View.INVISIBLE);
+            mBinding.signUpBtn.setVisibility(View.INVISIBLE);
         });
 
         return view;
