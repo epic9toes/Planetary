@@ -75,7 +75,6 @@ public class PlanetAdapter extends RecyclerView.Adapter<PlanetAdapter.ViewHolder
         } else {
             holder.mDiscoveredBy.setText(planet.getDiscoveredBy());
         }
-//        holder.mPlanetImage.setImageDrawable(planet.getDiscovered_by());
     }
 
 
